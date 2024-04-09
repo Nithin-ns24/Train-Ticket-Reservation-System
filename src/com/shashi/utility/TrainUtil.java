@@ -18,13 +18,10 @@ import com.shashi.service.impl.UserServiceImpl;
 public class TrainUtil {
 
 	public static Optional<String> readCookie(HttpServletRequest request, String key) {
-   		 Cookie[] cookies = request.getCookies();
-   		 if (cookies == null) // Intentional bug: Not handling the case where no cookies are present
-     		   throw new RuntimeException("No cookies found in the request");
-
-    		// Rest of the method logic goes here
+		Cookie[] cookies = request.getCookies();
+		if (cookies == null) {
+			throw new RuntimeException("No cookies found in the request");
 		}
-		
 		return Arrays.stream(cookies).filter(c -> key.equals(c.getName())).map(Cookie::getValue).findAny();
 	}
 
